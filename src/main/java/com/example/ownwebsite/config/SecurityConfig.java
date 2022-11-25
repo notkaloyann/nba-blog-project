@@ -19,7 +19,7 @@ public class SecurityConfig {
         return http.authorizeRequests()
                 .antMatchers("/js/**","/css/**","/img/**").permitAll()
                 .antMatchers("/","/users/login","/users/register").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/articles/add").access("hasRole('ADMIN')")
                 .and()
                 .formLogin().loginPage("/users/login")
                 .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
