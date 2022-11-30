@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -76,15 +75,16 @@ public class UserController {
     }
 
     @PostMapping("/logging-error")
-    public ModelAndView failedLogin(@ModelAttribute
-                                                (UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username){
+    public String failedLogin(@ModelAttribute
+                                                (UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
+                                    RedirectAttributes redirectAttributes){
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("bad_credentials",true);
-        modelAndView.addObject("username",username);
-        modelAndView.setViewName("/login");
 
-        return modelAndView;
+        redirectAttributes.addFlashAttribute("bad_credentials",true);
+        redirectAttributes.addFlashAttribute("username",username);
+
+
+        return "redirect:/users/login";
     }
 
 
