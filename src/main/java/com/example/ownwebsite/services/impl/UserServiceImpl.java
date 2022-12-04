@@ -1,4 +1,4 @@
-package com.example.ownwebsite.services;
+package com.example.ownwebsite.services.impl;
 
 import com.example.ownwebsite.models.entities.Role;
 import com.example.ownwebsite.models.entities.RoleNameEnum;
@@ -6,6 +6,8 @@ import com.example.ownwebsite.models.entities.User;
 import com.example.ownwebsite.models.service.UserRegistrationServiceModel;
 import com.example.ownwebsite.repositories.UserRepository;
 import com.example.ownwebsite.security.DemoUserDetailsService;
+import com.example.ownwebsite.services.RoleService;
+import com.example.ownwebsite.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -91,6 +93,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean alreadyExist(String username) {
         return this.userRepository.findUserByUsername(username).isPresent();
+    }
+
+    @Override
+    public User returnUserEntity(String username) {
+        return this.userRepository.findUserByUsername(username).orElse(null);
     }
 
 

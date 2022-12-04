@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://thymeleaf.org">
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:insert="fragments/commons::head">
 </head>
 <body>
@@ -12,11 +14,12 @@
     <h1 class="text-light border-bottom">Add Article</h1>
     <div class="d-flex justify-content-center">
         <form th:action="@{/articles/add}" method="POST"
+              th:object="${articleAddBindingModel}"
               class="text-light">
             <div class="form-row">
                 <div class="col">
                     <label for="title">Article Title</label>
-                    <input id="title" type="text" class="form-control" placeholder="Title">
+                    <input th:field="*{title}" id="title" type="text" class="form-control" placeholder="Title">
                     <small id="titleError" class="form-text bg-danger rounded">Title must be between 3 and 20
                         characters</small>
                 </div>
@@ -24,13 +27,13 @@
             <div class="form-row ">
                 <div class="col">
                     <label for="homeTM">Home Team</label>
-                    <input id="homeTM" type="text" class="form-control" placeholder="Home team name">
+                    <input th:field="*{homeTeam}" id="homeTM" type="text" class="form-control" placeholder="Home team name">
 
                 </div>
 
                 <div class="col">
                     <label for="homeTMScore">Home Team Score</label>
-                    <input id="homeTMScore" type="text" class="form-control" placeholder="Home team game score">
+                    <input th:field="*{scoreHomeTeam}" id="homeTMScore" type="text" class="form-control" placeholder="Home team game score">
 
                 </div>
             </div>
@@ -38,13 +41,13 @@
             <div class="form-row ">
                 <div class="col">
                     <label for="awayTM">Away Team</label>
-                    <input id="awayTM" type="text" class="form-control" placeholder="Away team name">
+                    <input th:field="*{awayTeam}" id="awayTM" type="text" class="form-control" placeholder="Away team name">
 
                 </div>
 
                 <div class="col">
                     <label for="awayTMScore">Away Team Score</label>
-                    <input id="awayTMScore" type="text" class="form-control" placeholder="Away team game score">
+                    <input th:field="*{scoreAwayTeam}" id="awayTMScore" type="text" class="form-control" placeholder="Away team game score">
 
                 </div>
             </div>
@@ -52,7 +55,7 @@
             <div class="form-row">
                 <div class="col">
                     <label for="content">Text content</label>
-                    <textarea id="content" type="text" class="form-control" placeholder="Game details"></textarea>
+                    <textarea th:field="*{description}" id="content" type="text" class="form-control" placeholder="Game details"></textarea>
                     <small id="contentError" class="form-text bg-danger rounded">Text content length must be more than 5 characters</small>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 package com.example.ownwebsite.services;
 
+import com.example.ownwebsite.models.entities.User;
 import com.example.ownwebsite.models.service.UserRegistrationServiceModel;
 
 public interface UserService {
@@ -8,5 +9,6 @@ public interface UserService {
 
     void seedUsers();
     boolean alreadyExist(String username);
+    User returnUserEntity(String username);
 
 }

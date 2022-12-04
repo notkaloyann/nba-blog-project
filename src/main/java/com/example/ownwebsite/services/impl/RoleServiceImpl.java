@@ -1,8 +1,9 @@
-package com.example.ownwebsite.services;
+package com.example.ownwebsite.services.impl;
 
 import com.example.ownwebsite.models.entities.Role;
 import com.example.ownwebsite.models.entities.RoleNameEnum;
 import com.example.ownwebsite.repositories.RoleRepository;
+import com.example.ownwebsite.services.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -47,3 +47,12 @@ body {
     background-image: url("/img/instruments.jpg");
     background-position: center;
 }
+
+input:valid{
+    border: #34ce57 solid 2px;
+}
+
+input:invalid{
+    border: red solid 2px;
+}
+
