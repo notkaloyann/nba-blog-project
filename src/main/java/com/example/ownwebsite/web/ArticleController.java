@@ -37,11 +37,11 @@ public class ArticleController {
         return new ArticleAddBindingModel();
     }
 
-
     @GetMapping("/all")
-    public String allArticles (){
+    public String allArticles(){
         return "all-articles";
     }
+
 
     @GetMapping("/add")
     public String addArticle(){
@@ -73,7 +73,7 @@ public class ArticleController {
         this.articleService.addArticle(articleServiceModel);
 
 
-        return "redirect:/";
+        return "redirect:/all";
     }
 
 }

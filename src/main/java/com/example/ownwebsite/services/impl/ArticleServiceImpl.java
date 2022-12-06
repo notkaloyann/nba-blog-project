@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
+import java.util.List;
 
 @Service
 @Transactional
@@ -39,5 +40,10 @@ public class ArticleServiceImpl implements ArticleService {
         this.articleRepository.save(article);
 
 
+    }
+
+    @Override
+    public List<Article> allArticles() {
+        return this.articleRepository.findAll();
     }
 }

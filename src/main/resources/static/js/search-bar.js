@@ -1,58 +1,44 @@
-const albumsList = document.getElementById('albumsList');
+const articlesList = document.getElementById('articlesList');
 const searchBar = document.getElementById('searchInput');
-const allAlbums = [];
-fetch("http://localhost:8080/albums/api")
+const allArticles = [];
+
+
+fetch("http://localhost:8000/articles/api")
     .then(response => response.json())
     .then(data => {
         for (let d of data) {
-            allAlbums.push(d);
+            allArticles.push(d);
         }
     });
 
 searchBar.addEventListener('keyup', (e) => {
     const searchingCharacters = searchBar.value.toLowerCase();
-    console.log(allAlbums);
-    let filteredAlbums = allAlbums.filter(album => {
-        return album.name.toLowerCase().includes(searchingCharacters)
-            || album.artist.name.toLowerCase().includes(searchingCharacters);
+    let filteredArticles = allArticles.filter(article => {
+        return article.title.toLowerCase().includes(searchingCharacters)
+            || article.description.toLowerCase().includes(searchingCharacters);
     });
-    console.log(filteredAlbums);
-    displayAlbums(filteredAlbums);
-})
 
-
-const displayAlbums = (albums) => {
-    albumsList.innerHTML = albums
-        .map((a) => {
-            return ` <div class="col-md-3" >
-                <div class="card mb-4 box-shadow">
-                <img src="${a.imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
-                     data-holder-rendered="true"
-                     style="height: 225px; width: 100%; display: block;">
-                <div class="card-body">
-                    <div class="text-center">
-                        <p class="card-text border-bottom ">Name: ${a.name}</p>
-                        <p class="card-text border-bottom ">Artist: ${a.artist.name}</p>
-                        <p class="card-text border-bottom ">Genre: ${a.genre}</p>
-                        <p class="card-text border-bottom ">Price: ${a.price}</p>
-                        <p class="card-text border-bottom">Release Date: ${a.releaseDate}</p>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        
-                        <div class="btn-group">
-                            <a href="/albums/details/${a.id}"  type="button" class="btn btn-sm btn-outline-secondary">Details</a>
-                        </div>
-                        <div class="btn-group">
-                            <a href="/albums/delete/${a.id}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
-                        </div>
-   
+    const displayArticles = (articles) => {
+        articlesList.innerHTML = articles
+            .map((article) => {
+                return `
+            <div class="col-md-6">
+                <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <p class="card-text border-bottom">${article.title}</p>
+                        <p class="mb-1 text-muted">${article.createdOn}</p>
+                        <p class="card-text mb-auto">${article.description}</p>
+                        <a href="/static">Continue reading.....</a>
                     </div>
                 </div>
-            </div> 
             </div>`
-        })
-        .join('');
+            })
+            .join('');
 
-}
+    }
+
+    displayArticles(filteredArticles);
+});
+
 
 
