@@ -16,7 +16,7 @@
 <header th:fragment="navigation">
     <nav class="navbar navbar-expand-lg bg-nav rounded">
         <a class="nav-link" href="/">
-            <img src="/img/NBA-Logo-Vector-PNG1.png" width="100px" alt="HeadPhones picture">
+            <img src="/img/logo.png" width="70px" alt="HeadPhones picture">
         </a>
 
         <div sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown">
@@ -24,8 +24,8 @@
                 Admin Panel
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/statistics">Statistics</a>
-                <a class="dropdown-item" href="/articles/add">Add article</a>
+                <a class="dropdown-item" href="/statistics">STATS</a>
+                <a class="dropdown-item" href="/articles/add">ADD ARTICLE</a>
                 <a class="dropdown-item" href="#">Something else here</a>
             </div>
         </div>
@@ -35,22 +35,22 @@
             <ul class="navbar-nav row">
 
                 <li sec:authorize="isAnonymous()" class="nav-item">
-                    <a class="nav-link text-white active h5" href="/users/login">Login</a>
+                    <a class="nav-link text-white active h5" href="/users/login">LOGIN</a>
                 </li>
                 <li sec:authorize="isAnonymous()" class="nav-item ">
-                    <a class="nav-link text-white active h5" href="/users/register">Register</a>
+                    <a class="nav-link text-white active h5" href="/users/register">REGISTER</a>
                 </li>
 
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a class="nav-link text-white active h5" th:href="@{/users/logout}">Logout</a>
+                    <a class="nav-link text-white active h5" th:href="@{/users/logout}">LOGOUT</a>
                 </li>
 
 
                 <li class="nav-item ">
-                    <a  sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link text-white active h5" href="/articles/add">Add Article</a>
+                    <a  sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link text-white active h5" href="/articles/add">ADD ARTICLE</a>
                 </li>
                 <li class="nav-item ">
-                    <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" href="/articles/all">All Articles</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" href="/articles/all">ALL ARTICLES</a>
                 </li>
 
 

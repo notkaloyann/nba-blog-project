@@ -1,5 +1,7 @@
 package com.example.ownwebsite.models.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import java.time.Instant;
 
@@ -38,6 +40,7 @@ public class Article extends BaseEntity{
     }
 
     @Column(name = "article_name", nullable = false)
+    @Length(min = 3)
     public String getTitle() {
         return title;
     }

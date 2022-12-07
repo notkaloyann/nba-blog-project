@@ -5,17 +5,29 @@
 
 
 <head th:insert="fragments/commons::head">
+    <link href="https://fonts.cdnfonts.com/css/signerica-fat" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/bodonisbulemy" rel="stylesheet">
 </head>
 <body>
 <header th:insert="fragments/commons::navigation"
 ></header>
 <main class="p-5 align-content-center bg-blur">
-    <h1 class="text-light border-left pl-2" sec:authorize="isAuthenticated()">Welcome,</h1>
-    <h1 class="text-light border-left pl-2" sec:authorize="isAuthenticated()"> <span th:text ="${#authentication.getPrincipal().getUsername()}"></span></h1>
-    <div class="d-flex justify-content-center">
+    <div class="wrapper-welcome">
+    <h1 class="welcome-message" sec:authorize="isAuthenticated()"><style>
+        @import url('https://fonts.cdnfonts.com/css/bodonisbulemy');
+    </style>Welcome,</h1>
+    <h1 class="welcome-message" sec:authorize="isAuthenticated()"> <span th:text ="${#authentication.getPrincipal().getUsername()}"><style>
+@import url('https://fonts.cdnfonts.com/css/bodonisbulemy');
+</style></span></h1>
+    </div>
+    <h2 class="quotes"><style>
+        @import url('https://fonts.cdnfonts.com/css/signerica-fat');
+    </style>Talent wins games,
+        but teamwork wins championships.</h2>
+
+ <div class="d-flex justify-content-center">
         <div class="my-index-div w-50">
-            <iframe class="w-100 h-100" src="https://www.youtube.com/embed/-6CJxDnb-hY" title="The Most Unforgettable Moments Of The 2022 NBA Playoffs
- ; autoplay" allowfullscreen></iframe>
+
         </div>
     </div>
 </main>

@@ -12,9 +12,7 @@ xmlns:th="http://thymeleaf.org">
 <main class="p-5 align-content-center bg-blur my-register-div">
     <h1 class="text-light    border-bottom mb-5">Login</h1>
     <div class="d-flex justify-content-center">
-        <div class="row g-3 align-items-center">
-            <img alt="Metallica image" src="/img/nba-login.jpg" class="w-50 rounded">
-        </div>
+
         <div class="row g-3 align-items-center">
             <div th:if="${bad_credentials}" class="alert alert-danger" role="alert">
                 This username and password combination does not exist.

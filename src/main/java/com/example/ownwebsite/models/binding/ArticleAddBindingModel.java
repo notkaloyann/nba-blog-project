@@ -17,6 +17,7 @@ public class ArticleAddBindingModel {
     }
 
     @NotNull
+    @Length(min = 3)
     public String getTitle() {
         return title;
     }
