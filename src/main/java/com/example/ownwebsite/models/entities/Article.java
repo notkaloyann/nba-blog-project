@@ -60,6 +60,8 @@ public class Article extends BaseEntity{
         return this;
     }
 
+
+    @Column(name = "description", columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }

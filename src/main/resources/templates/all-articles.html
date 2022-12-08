@@ -26,13 +26,13 @@
                     .then(response => response.json())
                     .then(data => {
                         for (let article of data) {
-                            articlesList.innerHTML += `<div class="col-md-6 h-50">
+                            articlesList.innerHTML += `<div id="individual-article" class="col-md-6 h-50">
                         <div class="card flex-md-row mb-4 shadow-sm h-md-250">
                             <div class="card-body d-flex flex-column align-items-start">
                                 <h3 class="card-text border-bottom">${article.title.substring(0,35)}</h3>
                                 <p class="mb-1 text-muted">Posted on ${article.createdOn.replace(`Z`, ``).replace(`T`, ` at `).split(`+`)[0]}</p>
                                 <p class="card-text mb-auto">${article.description.substring(0,60)}</p>
-                                <a href="http://localhost:8000/articles/${article.id}">Continue reading.....</a>
+                                <a id="link" href="http://localhost:8000/articles/${article.id}">Continue reading.....</a>
                             </div>
                         </div>
                     </div>`
