@@ -2,6 +2,7 @@ package com.example.ownwebsite.services.impl;
 
 import com.example.ownwebsite.models.entities.Article;
 import com.example.ownwebsite.models.service.ArticleServiceModel;
+import com.example.ownwebsite.models.view.ArticleViewModel;
 import com.example.ownwebsite.repositories.ArticleRepository;
 import com.example.ownwebsite.services.ArticleService;
 import com.example.ownwebsite.services.MatchupService;
@@ -45,5 +46,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> allArticles() {
         return this.articleRepository.findAll();
+    }
+
+    @Override
+    public ArticleViewModel returnArticleById(Long id) {
+
+        ArticleViewModel articleViewModel = this.modelMapper.map(this.articleRepository.findById(id).orElse(null),ArticleViewModel.class);
+        articleViewModel.setUserEntity(this.articleRepository.findById(id).orElse(null).getUserEntity().getUsername());
+    return articleViewModel;
+
     }
 }

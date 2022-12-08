@@ -55,8 +55,28 @@
     white-space: nowrap!important;
     text-overflow: ellipsis!important;
 
-
 }
+
+.article-content{
+    -webkit-box-flex:0;
+    -ms-flex:0 0 50%;
+    flex:0 0 50%;
+    max-width:50%;
+    display:table-cell;
+}
+
+#articlesBackButton{
+    margin-bottom: 50px;
+}
+
+#title-of-article{
+    margin-bottom: 50px;
+}
+
+#title-description{
+    margin-top: 50px;
+}
+
 
 
 footer {

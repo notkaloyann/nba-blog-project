@@ -4,6 +4,16 @@ import java.time.Instant;
 
 public class ArticleViewModel {
 
+    public Long getId() {
+        return id;
+    }
+
+    public ArticleViewModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    private Long id;
     private String title;
     private String description;
     private Instant createdOn;
