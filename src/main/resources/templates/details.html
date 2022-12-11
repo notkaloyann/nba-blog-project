@@ -37,28 +37,6 @@
                 <div class="col-md-8">
                     <div class="d-flex flex-column comment-section ">
                         <div class="bg-blur text-light p-2 rounded">
-                            <div class="d-flex flex-row user-info">
-                                <img class="rounded-circle"
-                                     width="40">
-                                <div class="d-flex flex-column justify-content-start ml-2">
-                                    <span class="d-block font-weight-bold name"></span>
-                                    <span> Comment added on date and time </span></div>
-                            </div>
-                            <div class="mt-2">
-                                <p class="comment-text">Comment text</p>
-                            </div>
-                        </div>
-                        <div class="bg-blur text-light rounded ">
-                            <div class="d-flex flex-row fs-12 float-right">
-                                <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span
-                                        class="ml-1">Like</span></div>
-                                <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span>
-                                </div>
-                                <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-blur text-light p-2 rounded">
                             <form th:object="${commentAddBindingModel}" th:action="@{/articles/} + ${article.id}" method="POST">
                                 <div class="d-flex flex-row align-items-start">
                                     <img class="rounded-circle"
@@ -75,6 +53,41 @@
                                 </div>
                             </form>
                         </div>
+                        <div id="commentsContainer" class="bg-blur text-light p-2 rounded">
+                            <script>
+                                const comments = document.getElementById("commentsContainer");
+                                const pathArray = window.location.pathname.split('/');
+
+                                fetch("http://localhost:8000/articles/".concat(pathArray[2]).concat("/comments"))
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        for (let comment of data){
+
+                                            comments.innerHTML +=`<div className="bg-blur text-light p-2 rounded">
+                                    <div className="d-flex flex-row user-info">
+                                        <img className="rounded-circle"
+                                             width="40">
+                                            <div className="d-flex flex-column justify-content-start ml-2">
+                                                <span className="d-block font-weight-bold name"></span>
+                                                <span> Comment added on ${comment.postedOn} </span></div>
+                                    </div>
+                                    <div className="mt-2">
+                                        <p className="comment-text"> Posted by: ${comment.user}</p>
+                                    </div>
+                                    <div className="mt-2">
+                                        <p className="comment-text">${comment.commentContent}</p>
+                                    </div>
+                                </div>`
+                                        }
+                                    })
+
+
+
+
+                            </script>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
