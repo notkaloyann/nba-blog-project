@@ -1,6 +1,7 @@
 package com.example.ownwebsite.services;
 
 import com.example.ownwebsite.models.entities.Article;
+import com.example.ownwebsite.models.entities.Comment;
 import com.example.ownwebsite.models.service.ArticleServiceModel;
 import com.example.ownwebsite.models.view.ArticleViewModel;
 
@@ -11,5 +12,8 @@ public interface ArticleService {
     public void addArticle(ArticleServiceModel articleServiceModel);
     List<Article> allArticles();
     ArticleViewModel returnArticleById(Long id);
+
+    void setCommentToArticle(Long id,
+                             Comment commentInput);
 
 }

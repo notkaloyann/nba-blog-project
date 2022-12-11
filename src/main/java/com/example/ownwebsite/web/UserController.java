@@ -27,7 +27,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")z
+    @GetMapping("/login")
     public String login(){
         //Test current user:
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -2,9 +2,12 @@ package com.example.ownwebsite.web;
 
 
 import com.example.ownwebsite.models.binding.ArticleAddBindingModel;
+import com.example.ownwebsite.models.binding.CommentAddBindingModel;
 import com.example.ownwebsite.models.service.ArticleServiceModel;
+import com.example.ownwebsite.models.service.CommentServiceModel;
 import com.example.ownwebsite.models.view.ArticleViewModel;
 import com.example.ownwebsite.services.ArticleService;
+import com.example.ownwebsite.services.CommentService;
 import com.example.ownwebsite.services.TeamService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,18 +25,24 @@ public class ArticleController {
 
     private final ModelMapper modelMapper;
     private final ArticleService articleService;
-
     private final TeamService teamService;
+    private final CommentService commentService;
 
-    public ArticleController(ModelMapper modelMapper, ArticleService articleService, TeamService teamService) {
+    public ArticleController(ModelMapper modelMapper, ArticleService articleService, TeamService teamService, CommentService commentService) {
         this.modelMapper = modelMapper;
         this.articleService = articleService;
         this.teamService = teamService;
+        this.commentService = commentService;
     }
 
     @ModelAttribute("articleAddBindingModel")
     public ArticleAddBindingModel createBindingModel(){
         return new ArticleAddBindingModel();
+    }
+
+    @ModelAttribute("commentAddBindingModel")
+    public CommentAddBindingModel createCommentBindingModel(){
+        return new CommentAddBindingModel();
     }
 
     @GetMapping("/all")
@@ -82,6 +91,20 @@ public class ArticleController {
         model.addAttribute("article", article);
 
         return "details";
+    }
+
+    @PostMapping("/{id}")
+    public String postComment (@PathVariable Long id
+            ,@Valid CommentAddBindingModel commentAddBindingModel,
+                               Model model){
+
+        CommentServiceModel commentServiceModel = this.modelMapper.map(commentAddBindingModel, CommentServiceModel.class);
+        commentServiceModel.setUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        this.articleService.setCommentToArticle(id,this.commentService.addComment(commentServiceModel));
+        ArticleViewModel article = this.articleService.returnArticleById(id);
+        model.addAttribute("article", article);
+
+        return "redirect:/articles/{id}";
     }
 
 

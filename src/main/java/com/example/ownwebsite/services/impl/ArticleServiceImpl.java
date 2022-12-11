@@ -1,6 +1,7 @@
 package com.example.ownwebsite.services.impl;
 
 import com.example.ownwebsite.models.entities.Article;
+import com.example.ownwebsite.models.entities.Comment;
 import com.example.ownwebsite.models.service.ArticleServiceModel;
 import com.example.ownwebsite.models.view.ArticleViewModel;
 import com.example.ownwebsite.repositories.ArticleRepository;
@@ -54,6 +55,16 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleViewModel articleViewModel = this.modelMapper.map(this.articleRepository.findById(id).orElse(null),ArticleViewModel.class);
         articleViewModel.setUserEntity(this.articleRepository.findById(id).orElse(null).getUserEntity().getUsername());
     return articleViewModel;
+
+    }
+
+    @Override
+    public void setCommentToArticle(Long id, Comment commentInput) {
+
+        Article article = this.articleRepository.findById(id).orElse(null);
+        List<Comment> articleComments = article.getComments();
+        articleComments.add(commentInput);
+        article.setComments(articleComments);
 
     }
 }

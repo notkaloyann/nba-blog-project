@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "article")
@@ -14,6 +16,7 @@ public class Article extends BaseEntity{
     private String description;
     private Instant createdOn;
     private User userEntity;
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "created_on",nullable = false)
     public Instant getCreatedOn() {
@@ -68,6 +71,16 @@ public class Article extends BaseEntity{
 
     public Article setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    @OneToMany
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public Article setComments(List<Comment> comments) {
+        this.comments = comments;
         return this;
     }
 }
