@@ -6,8 +6,6 @@ import com.example.ownwebsite.repositories.TeamRepository;
 import com.example.ownwebsite.services.TeamService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class TeamServiceImpl implements TeamService {
 
@@ -18,9 +16,9 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Optional<Team> returnTeamByName(String teamName) {
+    public Team returnTeamByName(String teamName) {
 
-        return Optional.ofNullable(this.teamRepository.getTeamByTeamName(TeamEnum.valueOf(teamName)));
+        return this.teamRepository.getTeamByTeamName(TeamEnum.valueOf(teamName)).orElse(null);
     }
 
     @Override

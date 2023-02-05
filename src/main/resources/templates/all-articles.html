@@ -22,7 +22,7 @@
                 const articlesList = document.getElementById('articlesList');
 
 
-                fetch("http://localhost:8000/articles/api")
+                fetch("https://nba-blog.azurewebsites.net/articles/api")
                     .then(response => response.json())
                     .then(data => {
                         for (let article of data) {
@@ -32,19 +32,13 @@
                                 <h3 class="card-text border-bottom">${article.title.substring(0,35)}</h3>
                                 <p class="mb-1 text-muted">Posted on ${article.createdOn.replace(`Z`, ``).replace(`T`, ` at `).split(`+`)[0]}</p>
                                 <p class="card-text mb-auto">${article.description.substring(0,60)}</p>
-                                <a id="link" href="http://localhost:8000/articles/${article.id}">Continue reading.....</a>
+                                <a id="link" href="https://nba-blog.azurewebsites.net/articles/${article.id}">Continue reading.....</a>
                             </div>
                         </div>
                     </div>`
 
                         }
                     });
-
-
-
-
-
-
             </script>
         </div>
     </div>

@@ -9,7 +9,7 @@
 ></header>
 <main th:object="${article}"   class="p-5 align-content-center bg-blur">
 
-    <a href="http://localhost:8000/articles/all"><button id="articlesBackButton" class="btn btn-primary btn-sm shadow-none">Back to Articles</button></a>
+    <a href="https://nba-blog.azurewebsites.net/articles/all"><button id="articlesBackButton" class="btn btn-primary btn-sm shadow-none">Back to Articles</button></a>
 
 
     <div id="title-of-article" class="justify-content-center">
@@ -58,7 +58,7 @@
                                 const comments = document.getElementById("commentsContainer");
                                 const pathArray = window.location.pathname.split('/');
 
-                                fetch("http://localhost:8000/articles/".concat(pathArray[2]).concat("/comments"))
+                                fetch("https://nba-blog.azurewebsites.net/articles/".concat(pathArray[2]).concat("/comments"))
                                     .then(response => response.json())
                                     .then(data => {
                                         for (let comment of data){

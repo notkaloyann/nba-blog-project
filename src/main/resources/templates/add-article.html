@@ -30,6 +30,8 @@
                 <div class="col">
                     <label for="homeTM">Home Team</label>
                     <input th:field="*{homeTeam}" id="homeTM" type="text" class="form-control" placeholder="Home team name">
+                    <small th:if="${teamDoesNotExist}" id="teamDontExist"
+                           class="text-light form-text bg-danger rounded">Invalid team name! Please, check the name again.</small>
 
                 </div>
 
@@ -44,6 +46,8 @@
                 <div class="col">
                     <label for="awayTM">Away Team</label>
                     <input th:field="*{awayTeam}" id="awayTM" type="text" class="form-control" placeholder="Away team name">
+                    <small th:if="${teamDoesNotExist}" id="awayTeamDontExist"
+                           class="text-light form-text bg-danger rounded">Invalid team name! Please, check the name again.</small>
 
                 </div>
 

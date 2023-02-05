@@ -26,8 +26,8 @@ public class MatchupServiceImpl implements MatchupService {
     @Override
     public Matchup addMatchup(ArticleServiceModel articleServiceModel) {
         Matchup matchup = new Matchup();
-        matchup.setHomeTeam(this.teamService.returnTeamByName(articleServiceModel.getHomeTeam()).orElse(null))
-                .setAwayTeam(this.teamService.returnTeamByName(articleServiceModel.getAwayTeam()).orElse(null))
+        matchup.setHomeTeam(this.teamService.returnTeamByName(articleServiceModel.getHomeTeam()))
+                .setAwayTeam(this.teamService.returnTeamByName(articleServiceModel.getAwayTeam()))
                 .setScoreHomeTeam(articleServiceModel.getScoreHomeTeam())
                 .setScoreAwayTeam(articleServiceModel.getScoreAwayTeam());
         this.matchupRepository.save(matchup);

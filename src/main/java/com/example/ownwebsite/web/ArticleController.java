@@ -3,6 +3,7 @@ package com.example.ownwebsite.web;
 
 import com.example.ownwebsite.models.binding.ArticleAddBindingModel;
 import com.example.ownwebsite.models.binding.CommentAddBindingModel;
+import com.example.ownwebsite.models.entities.TeamEnum;
 import com.example.ownwebsite.models.service.ArticleServiceModel;
 import com.example.ownwebsite.models.service.CommentServiceModel;
 import com.example.ownwebsite.models.view.ArticleViewModel;
@@ -69,8 +70,8 @@ public class ArticleController {
 
         }
 
-        if (this.teamService.returnTeamByName(articleAddBindingModel.getHomeTeam()).isEmpty()
-        || this.teamService.returnTeamByName(articleAddBindingModel.getAwayTeam()).isEmpty()){
+        if (!TeamEnum.containsTeam(articleAddBindingModel.getHomeTeam())
+        || !TeamEnum.containsTeam(articleAddBindingModel.getAwayTeam())){
             redirectAttributes.addFlashAttribute("articleAddBindingModel",articleAddBindingModel);
             redirectAttributes.addFlashAttribute("teamDoesNotExist",true);
             return "redirect:/articles/add";
@@ -81,7 +82,7 @@ public class ArticleController {
         this.articleService.addArticle(articleServiceModel);
 
 
-        return "redirect:/all";
+        return "redirect:/articles/all";
     }
 
     @GetMapping("/{id}")
