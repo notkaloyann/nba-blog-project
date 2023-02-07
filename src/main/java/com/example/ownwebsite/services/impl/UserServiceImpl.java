@@ -4,6 +4,7 @@ import com.example.ownwebsite.models.entities.Role;
 import com.example.ownwebsite.models.entities.RoleNameEnum;
 import com.example.ownwebsite.models.entities.User;
 import com.example.ownwebsite.models.service.UserRegistrationServiceModel;
+import com.example.ownwebsite.models.view.UserViewModel;
 import com.example.ownwebsite.repositories.UserRepository;
 import com.example.ownwebsite.security.DemoUserDetailsService;
 import com.example.ownwebsite.services.RoleService;
@@ -98,6 +99,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User returnUserEntity(String username) {
         return this.userRepository.findUserByUsername(username).orElse(null);
+    }
+
+    @Override
+    public UserViewModel returnUserViewModel(String username) {
+        return this.modelMapper.map(this.userRepository.findUserByUsername(username).orElse(null), UserViewModel.class);
     }
 
 

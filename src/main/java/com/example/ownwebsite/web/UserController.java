@@ -1,11 +1,17 @@
 package com.example.ownwebsite.web;
 
 import com.example.ownwebsite.models.binding.UserRegisterBindingModel;
+import com.example.ownwebsite.models.entities.User;
 import com.example.ownwebsite.models.service.UserRegistrationServiceModel;
+import com.example.ownwebsite.models.view.UserViewModel;
+import com.example.ownwebsite.repositories.UserRepository;
 import com.example.ownwebsite.services.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,10 +27,12 @@ public class UserController {
 
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(ModelMapper modelMapper, UserService userService) {
+    public UserController(ModelMapper modelMapper, UserService userService, UserRepository userRepository) {
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/login")
@@ -88,8 +96,30 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-        public String userProfile (){
+        public String userProfile (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        UserViewModel userViewModel = this.userService.returnUserViewModel(username);
+        model.addAttribute("userViewModel", userViewModel);
         return "profile";
+        }
+
+        @PostMapping("/profile")
+        public String updateUserProfile(@Valid UserViewModel userViewModel,
+                                        BindingResult bindingResult,RedirectAttributes redirectAttributes){
+
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("namesError", true);
+            return "redirect:profile";
+        }
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+            User user = userService.returnUserEntity(username);
+            user.setEmail(userViewModel.getEmail()).setBio(userViewModel.getBio()).setFirstAndLastName(userViewModel.getFirstAndLastName());
+            userRepository.save(user);
+        return "redirect:/users/profile";
         }
 
 

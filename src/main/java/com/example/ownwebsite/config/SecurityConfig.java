@@ -18,8 +18,8 @@ public class SecurityConfig {
 
         return http.authorizeRequests()
                 .antMatchers("/js/**","/css/**","/img/**").permitAll()
-                .antMatchers("/","/users/login","/users/register","/articles/**").permitAll()
-                .antMatchers("/articles/**", "/users/profile").authenticated()
+                .antMatchers("/","/users/login","/users/register","/articles/all").permitAll()
+                .antMatchers("/articles/add", "/users/profile").authenticated()
                 .and()
                 .formLogin().loginPage("/users/login")
                 .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
